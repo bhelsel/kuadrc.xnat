@@ -59,7 +59,7 @@ Here is some examples of the functions and what it might look like in an R Scrip
 
 ```r
 
-project_id <- get_projects(name = "down-syndrom-cohort")
+project_id <- get_projects(name = "down-syndrome-cohort")
 
 list_of_subjects <- get_subjects(project = project_id)
 
