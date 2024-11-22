@@ -1,0 +1,17 @@
+Package: kuadrc.xnat
+Type: Package
+Title: Makes it easier to work with the XNAT API
+Version: 0.1.0
+Authors@R: c(
+    person(c("Brian", "C."), "Helsel", email = "bhelsel@kumc.edu", role = c("aut", "cre"))
+    )
+Description: Eases the implementation of working with the XNAT API in R and offers
+    ways to read in dicm file formats convert them to images that can be used on reports.
+License: file LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+Imports:
+  httr,
+  jsonlite,
+  utils
