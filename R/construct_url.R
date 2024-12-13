@@ -20,7 +20,7 @@ construct_url <- function(server,
 
   if(!is.null(projects) & is.null(subjects) & is.null(experiments)){
     url <- sprintf("%s/projects/%s", url, projects)
-  } else if(is.null(projects) & is.null(subjects) & !is.null(experiments)){
+  } else if((is.null(projects) | is.null(subjects)) & !is.null(experiments)){
     url <- sprintf("%s/experiments/%s", url, experiments)
   } else if(!is.null(projects) & !is.null(subjects) & is.null(experiments)){
     subjects <- sprintf("%s_%s", projects, subjects)
@@ -29,7 +29,6 @@ construct_url <- function(server,
       url, projects, subjects
       )
   } else if(!is.null(projects) & !is.null(subjects) & !is.null(experiments)){
-    experiments <- sprintf("%s_%s_%s", projects, subjects, experiments)
     subjects <- sprintf("%s_%s", projects, subjects)
     url <- sprintf(
       "%s/projects/%s/subjects/%s/experiments/%s",

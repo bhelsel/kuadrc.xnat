@@ -4,7 +4,7 @@
 #' alias and secret. 
 #' @param url The URL representing the API endpoint
 #' @param username The user's alias or username
-#' @param password PARAM_DESCRIPTION
+#' @param password The user's secret or password
 #' @return A data.frame containing the data from the API endpoint
 #' @details Retrieves data from the XNAT server's API endpoint. A user can
 #' interact with this function directly by adding their username and password or

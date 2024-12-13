@@ -29,5 +29,7 @@
 #' \code{\link{xnat_get}}
 #'
 #' @name kuadrc.xnat
+#' 
+#' @importFrom utils unzip
 
 NULL

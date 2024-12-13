@@ -14,8 +14,10 @@
 get_projects <- function(name = NULL, ...){
 
   params <- list(...)
-  credentials <- validate_credentials(...)
-  server <- credentials$server
+  if(!"username" %in% names(params) & !"password" %in% names(params)){
+    credentials <- validate_credentials(...)
+  }
+  server <- validate_server(...)
   alias <- ifelse(!is.null(params$username), params$username, credentials$alias)
   secret <- ifelse(!is.null(params$password), params$password, credentials$secret)
 

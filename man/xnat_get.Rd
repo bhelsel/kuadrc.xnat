@@ -11,7 +11,7 @@ xnat_get(url, username, password)
 
 \item{username}{The user's alias or username}
 
-\item{password}{PARAM_DESCRIPTION}
+\item{password}{The user's secret or password}
 }
 \value{
 A data.frame containing the data from the API endpoint

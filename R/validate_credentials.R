@@ -17,22 +17,12 @@ validate_credentials <- function(...){
 
   credentials <- list(...)
 
-  if(is.null(credentials$server)) server <- Sys.getenv("XNAT_SERVER")
-
   if(is.null(credentials$alias)) alias <- Sys.getenv("XNAT_ALIAS")
 
   if(is.null(credentials$secret)) secret <- Sys.getenv("XNAT_SECRET")
 
-  if(server == ""){
-    message(
-      "We did not find a server in your R environment or your recent call to a kuadrc.xnat function.\n",
-      "Please add a server below to continue or select 'esc' and edit the ~/.Renviron file directly.\n\n",
-      "An example of a valid server is https://xnat.university.edu where your {server} is substituted for {university}.\n"
-    )
-    server <- readline(prompt = "Server: ")
-    add_server(server); server <- Sys.getenv("XNAT_SERVER")
-  }
-
+  server <- validate_server()
+  
   token <- list(alias = alias, secret = secret)
 
   is_valid <- FALSE

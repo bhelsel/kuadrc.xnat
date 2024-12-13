@@ -16,8 +16,10 @@
 get_experiments <- function(project = NULL, subject = NULL, experiment = NULL, ...){
 
   params <- list(...)
-  credentials <- validate_credentials(...)
-  server <- credentials$server
+  if(!"username" %in% names(params) & !"password" %in% names(params)){
+    credentials <- validate_credentials(...)
+  }
+  server <- validate_server(...)
   alias <- ifelse(!is.null(params$username), params$username, credentials$alias)
   secret <- ifelse(!is.null(params$password), params$password, credentials$secret)
 
@@ -31,8 +33,15 @@ get_experiments <- function(project = NULL, subject = NULL, experiment = NULL, .
 
   colnames(data) <- gsub("ResultSet.|Result.", "", colnames(data))
 
-  if(!is.null(experiment)){
-    data <- data[grepl(subject, data$label, ignore.case = TRUE), "ID"]
+  if(!is.null(project) & !is.null(experiment)){
+    data <- data[grepl(experiment, data$label, ignore.case = TRUE) |
+                   grepl(experiment, data$ID, ignore.case = TRUE), c("ID", "label")]
+  } else if(!is.null(subject) & !is.null(experiment)){
+    data <- data[grepl(subject, data$label, ignore.case = TRUE) &
+                   (grepl(experiment, data$label, ignore.case = TRUE) |
+                      grepl(experiment, data$ID, ignore.case = TRUE)), c("ID", "label")]
+  } else if(!is.null(experiment)){
+    data <- data[grepl(experiment, data$ID, ignore.case = TRUE), c("ID", "label")]
   }
 
   return(data)
