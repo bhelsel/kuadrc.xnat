@@ -26,7 +26,7 @@ devtools::install_github("bhelsel/kuadrc.xnat")
 We have made the XNAT API Validation process simple through our `validate_credentials`
 function which gets called each time a user makes a call to a XNAT API endpoint.
 Upon the first use of any of the kuadrc.xnat functions, the `validate_credentials`
-will prompt the user to add the server, alias, and secret to their "~/.Renviron"
+will prompt the user to add the server, alias, and secret to their ".Renviron"
 file. The alias and secret can be added by entering your username and password
 into the R console when prompted or logging into your XNAT server and manually
 generating an alias token to retrieve the alias and secret to copy and paste
@@ -34,11 +34,11 @@ into the R console. This step must be completed before a successful API call
 can be made to XNAT. 
 
 By default, the functions in the `kuadrc.xnat` package look for an alias and
-secret within the "~/.Renviron" file. However, the user may choose to bypass the
+secret within the ".Renviron" file. However, the user may choose to bypass the
 alias and secret by entering in their username and password. The alias and
 secret can also be added as arguments to the functions. The recognized arguments
 include `username` and `password` or `alias` and `secret`, but no arguments are
-needed if the alias and secret are stored in the "~/.Renviron" file.
+needed if the alias and secret are stored in the ".Renviron" file.
 
 ### Main API Endpoint Functions
 
