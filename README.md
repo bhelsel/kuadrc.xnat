@@ -75,6 +75,8 @@ url_for_download <- get_scans(experiment = experiment_id)
 
 ```
 
+### Additional Functions
+
 Knowing the project and subject IDs (e.g., having them in a data set) can speed
 up the process of identifying the API endpoint for downloading the images. To
 download the .dicm images from the XNAT server, there is a function called
