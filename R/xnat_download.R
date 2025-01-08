@@ -29,20 +29,22 @@ xnat_download <- function(outdir, ...){
   alias <- ifelse(!is.null(params$username), params$username, credentials$alias)
   secret <- ifelse(!is.null(params$password), params$password, credentials$secret)
   
+  projects <- get_projects()
+  
   if(is.null(params$project) & is.null(params$experiment)){
-    projects <- get_projects(...)
     project_no <- 
       utils::menu(
         title = "What project do you want to download imaging data for?",
         choices = paste0(projects$secondary_ID, ": ", projects$name)
     )
     params$project <- projects[project_no, "ID"]
-    params$projectLabel <- projects[project_no, "secondary_ID"]
-    
   }
   
+  params$projectLabel <- projects[projects$ID == params$project, "secondary_ID"]
+  
+  subjects <- get_subjects(project = params$project)
+  
   if(is.null(params$subject) & is.null(params$experiment)){
-    subjects <- get_subjects(project = params$project, ...)
     subject_no <- 
       utils::menu(
         title = "What subject do you want to download imaging data for?",
@@ -51,8 +53,9 @@ xnat_download <- function(outdir, ...){
     params$subject <- strsplit(subjects[subject_no, "label"], "_")[[1]][2]
   }
   
+  experiments <- get_experiments(project = params$project, subject = params$subject)
+  
   if(is.null(params$experiment)){
-    experiments <- get_experiments(project = params$project, subject = params$subject, ...)
     if(nrow(experiments) == 1){
       params$experiment <- experiments$ID
       params$experimentLabel <- experiments$label
@@ -63,7 +66,7 @@ xnat_download <- function(outdir, ...){
           choice = experiments$ID
         )
       params$experiment <- experiments[experiment_no, "ID"]
-      params$params$experimentLabel  <- experiments[experiment_no, "label"]
+      params$experimentLabel  <- experiments[experiment_no, "label"]
     }
   }
   

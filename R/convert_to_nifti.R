@@ -19,7 +19,9 @@ convert_to_nifti <- function(directory){
   
   directories <- basename(unique(dirname(files)))
   
-  directories <- directories[-which(directories == "1-localizer")]
+  if(any(grepl("1-localizer", directories))){
+    directories <- directories[-which(directories == "1-localizer")]  
+  }
   
   scan_types <- gsub("[0-9]-", "", directories)
   
