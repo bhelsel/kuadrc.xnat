@@ -70,17 +70,21 @@ xnat_download <- function(outdir, ...){
     }
   }
   
-  if(!is.null(params$experiment) & !is.null(params$scan)){
+  scans <- get_scans(project = params$project, subject = params$subject, experiment = params$experiment)
+  
+  if(!is.null(params$scan)){
     url <- construct_url(server = server, experiments = params$experiment)
-    if(tolower(params$scan) == "all"){
+    if("all" %in% tolower(params$scan)){
       url <- file.path(url, "scans/ALL/files?format=zip")
     } else{
+      if(length(params$scan) > 1){
+        params$scan <- paste0(grep(paste0(params$scan, collapse = "|"), scans$type), collapse = ",")
+      }
       url <- file.path(url, "scans", params$scan, "files?format=zip")
     }
   }
   
   if(is.null(params$scan)){
-    scans <- get_scans(experiment = params$experiment, ...)
     types <- c(scans$type, "ALL")
     scan_no <-
       utils::menu(
