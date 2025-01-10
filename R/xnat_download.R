@@ -91,16 +91,15 @@ xnat_download <- function(outdir, ...){
         title = "What scans do you want to download imaging data for?",
         choices = types
       )
-    params$scan <- types[scan_no]
     url <-
       construct_url(
         server = server, projects = params$project,
         subjects = params$subject, experiments = params$experiment
         )
-    if(params$scan == "ALL"){
+    if("all" %in% tolower(params$scan)){
       url <- file.path(url, "scans/ALL/files?format=zip")
     } else{
-      url <- file.path(url, "scans", params$scan, "files?format=zip")
+      url <- file.path(url, "scans", scan_no, "files?format=zip")
     }
   }
   
