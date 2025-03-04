@@ -22,7 +22,8 @@ xnat_get <- function(url, username, password){
   tryCatch({
     response <- httr::GET(
       url = url, 
-      httr::authenticate(user = username, password = password)
+      httr::authenticate(user = username, password = password),
+      config = httr::config(ssl_verifypeer = FALSE) # Added this temporarily to deal with ssl issues
       )
     
     if(httr::http_error(response)){

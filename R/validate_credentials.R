@@ -35,7 +35,8 @@ validate_credentials <- function(...){
 
     validation_results <- httr::GET(
       url = validation_url,
-      httr::authenticate(user = alias, password = secret)
+      httr::authenticate(user = alias, password = secret), 
+      config = httr::config(ssl_verifypeer = FALSE)
     )
 
     is_valid <- ifelse(validation_results$status_code == 200, TRUE, FALSE)
