@@ -21,6 +21,6 @@ Search for and validate the user's XNAT access token credentials.
 Search for and validate the user's XNAT access token credentials.
 }
 \seealso{
-\code{\link[httr]{GET}}, \code{\link[httr]{authenticate}}, \code{\link[httr]{BROWSE}}, \code{\link[httr]{content}}
+\code{\link[httr]{GET}}, \code{\link[httr]{authenticate}}, \code{\link[httr]{BROWSE}}, \code{\link[httr]{content}}, \code{\link[httr]{config}}
  \code{\link[utils]{menu}}
 }

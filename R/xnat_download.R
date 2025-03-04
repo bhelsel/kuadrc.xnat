@@ -11,11 +11,11 @@
 #' interact with this function directly by adding their username and password or
 #' alias and secret. 
 #' @seealso 
-#'  \code{\link[httr]{GET}}, \code{\link[httr]{authenticate}}, \code{\link[httr]{http_error}}, \code{\link[httr]{status_code}}, \code{\link[httr]{content}}
+#'  \code{\link[httr]{GET}}, \code{\link[httr]{authenticate}}, \code{\link[httr]{http_error}}, \code{\link[httr]{status_code}}, \code{\link[httr]{content}}, \code{\link[httr]{config}}
 #'  \code{\link[jsonlite]{toJSON, fromJSON}}
 #' @rdname xnat_download
 #' @export 
-#' @importFrom httr GET authenticate http_error status_code write_disk
+#' @importFrom httr GET authenticate http_error status_code write_disk config
 #' @importFrom jsonlite fromJSON
 
 
@@ -117,6 +117,7 @@ xnat_download <- function(outdir, ...){
     response <- httr::GET(
       url = url,
       httr::authenticate(user = alias, password = secret),
+      config = httr::config(ssl_verifypeer = FALSE),
       httr::write_disk(
         path = file,
         overwrite = TRUE)

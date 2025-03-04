@@ -27,6 +27,6 @@ interact with this function directly by adding their username and password or
 alias and secret.
 }
 \seealso{
-\code{\link[httr]{GET}}, \code{\link[httr]{authenticate}}, \code{\link[httr]{http_error}}, \code{\link[httr]{status_code}}, \code{\link[httr]{content}}
+\code{\link[httr]{GET}}, \code{\link[httr]{authenticate}}, \code{\link[httr]{http_error}}, \code{\link[httr]{status_code}}, \code{\link[httr]{content}}, \code{\link[httr]{config}}
  \code{\link[jsonlite]{toJSON, fromJSON}}
 }

@@ -6,11 +6,11 @@
 #' @return A list containing the server and user's validated access credentials.
 #' @details Search for and validate the user's XNAT access token credentials.
 #' @seealso
-#'  \code{\link[httr]{GET}}, \code{\link[httr]{authenticate}}, \code{\link[httr]{BROWSE}}, \code{\link[httr]{content}}
+#'  \code{\link[httr]{GET}}, \code{\link[httr]{authenticate}}, \code{\link[httr]{BROWSE}}, \code{\link[httr]{content}}, \code{\link[httr]{config}}
 #'  \code{\link[utils]{menu}}
 #' @rdname validate_credentials
 #' @export
-#' @importFrom httr GET authenticate BROWSE content
+#' @importFrom httr GET authenticate BROWSE content config
 #' @importFrom utils menu
 
 validate_credentials <- function(...){
