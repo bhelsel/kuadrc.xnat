@@ -64,7 +64,8 @@ validate_credentials <- function(...){
         password <- readline(prompt = "Please enter your password: ")
         token <- httr::GET(
           url = sprintf("%s/data/services/tokens/issue", server),
-          httr::authenticate(user = username, password = password)
+          httr::authenticate(user = username, password = password),
+          config = httr::config(ssl_verifypeer = FALSE)
         )
         status_code <- token$status_code
         token <- httr::content(token)
