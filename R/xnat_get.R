@@ -16,35 +16,32 @@
 #' @export 
 #' @importFrom httr GET authenticate http_error status_code content config
 #' @importFrom jsonlite fromJSON
+#' @importFrom rvest html_text html_nodes
 
 xnat_get <- function(url, username, password){
   
-  tryCatch({
-    response <- httr::GET(
-      url = url, 
-      httr::authenticate(user = username, password = password),
-      config = httr::config(ssl_verifypeer = FALSE) # Added this temporarily to deal with ssl issues
-      )
-    
-    if(httr::http_error(response)){
-      status <- httr::status_code(response)
-      stop(sprintf("Request failed with status code: %s", status))
-    }
-    
-    response_data <- as.data.frame(
-      jsonlite::fromJSON(
-        httr::content(
-          response, 
-          as = "text", 
-          encoding = "UTF-8")
-        )
-      )
-      
-    return(response_data)
-    
-  }, error = function(e) {
-    
-    message("An error occurred: ", e$message)
-    return(NULL)
-  })
+  response <- httr::GET(
+    url = url, 
+    httr::authenticate(user = username, password = password),
+    config = httr::config(ssl_verifypeer = FALSE) # Added this temporarily to deal with ssl issues
+  )
+  
+  if(httr::http_error(response)){
+    status <- httr::status_code(response)
+    contentHeader <- rvest::html_text(rvest::html_nodes(httr::content(response), "h3"))
+    if(length(contentHeader) == 0) contentHeader <- httr::content(response, as = "text")
+    stop(sprintf("Request failed with status code %s: \n\n%s", status, contentHeader))
+  }
+  
+  response_data <- as.data.frame(
+    jsonlite::fromJSON(
+      httr::content(
+        response, 
+        as = "text", 
+        encoding = "UTF-8")
+    )
+  )
+  
+  return(response_data)
+  
 }

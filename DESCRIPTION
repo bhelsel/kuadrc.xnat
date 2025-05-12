@@ -17,4 +17,5 @@ Imports:
   jsonlite,
   oro.dicom,
   oro.nifti,
+  rvest,
   utils
