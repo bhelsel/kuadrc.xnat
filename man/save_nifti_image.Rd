@@ -11,6 +11,7 @@ save_nifti_image(
   height = 11,
   dpi = 300,
   plane = c("", "axial", "sagittal", "coronal"),
+  save_file_as = NULL,
   ...
 )
 }
@@ -26,6 +27,8 @@ save_nifti_image(
 \item{dpi}{Plot resolution, Default: 300}
 
 \item{plane}{The plane to be displayed, Default: c("axial", "sagittal", "coronal")}
+
+\item{save_file_as}{An option to change the file to a name other than what was downloaded from xnat}
 
 \item{...}{Other arguments passed on to the `plot_nifti` function}
 }
