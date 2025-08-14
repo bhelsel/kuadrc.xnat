@@ -9,6 +9,7 @@ guess_view <- function(files){
   return(planes)
 }
 
+#' @export 
 # A wrapper to oro.nifti::readNIfTI
 read_nifti <- function(file){
   data <- oro.nifti::readNIfTI(file)
