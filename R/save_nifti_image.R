@@ -62,11 +62,10 @@ save_nifti_image <- function(
     }
     data <- read_nifti(files[i])
     p <- plot_nifti(data, plane = plane, ...)
-    save_file_as <- ifelse(
-      !is.null(save_file_as),
-      file.path(dirname(image_files[1]), save_file_as),
-      save_file_as
-    )
+    if(!is.null(save_file_as)){
+      save_file_as <- file.path(dirname(image_files[1]), save_file_as)
+    }
+      
     ggplot2::ggsave(
       filename = ifelse(!is.null(save_file_as), save_file_as, image_files[i]),
       plot = p,
